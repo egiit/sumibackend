@@ -20,18 +20,19 @@ export const Login = async (req, res) => {
     if (!match)
       return res
         .status(400)
-        .json({ message: 'User Name or Password Incorrect dari atas' });
+        .json({ message: 'User Name or Password Incorrect' });
     const userId = user.USER_ID;
     const username = user.USER_NAME;
     const userLevel = user.USER_LEVEL;
+    const userUnit = user.USER_UNIT;
     const userDept = user.USER_DEP;
     const accessToken = jwt.sign(
-      { userId, username, userLevel, userDept },
+      { userId, username, userLevel, userDept, userUnit },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: '20s' }
     );
     const refreshToken = jwt.sign(
-      { userId, username, userLevel, userDept },
+      { userId, username, userLevel, userDept, userUnit },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     );
@@ -49,9 +50,7 @@ export const Login = async (req, res) => {
     });
     res.json({ accessToken });
   } catch (error) {
-    res
-      .status(404)
-      .json({ message: 'User Name or Password Incorrect dariabawah' });
+    res.status(404).json({ message: 'User Name or Password Incorrect' });
   }
 };
 
