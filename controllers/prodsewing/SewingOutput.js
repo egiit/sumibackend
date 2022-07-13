@@ -113,7 +113,7 @@ export const postHC = async (req, res) => {
     }
 
     const dataHC = await OutProdHC.update(req.body, {
-      where: { PLAN_ID: req.body.PLAN_ID },
+      where: { PLAN_ID: findHc.PLAN_ID },
     });
     return res.json({ message: 'Data HC di Update', data: dataHC });
   } catch (error) {

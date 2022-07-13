@@ -7,6 +7,7 @@ import userRoute from './user.route.js';
 import userAccesRoute from './userAccess.route.js';
 import sewOutputProdRoute from './production/sewingprod.route.js';
 import packProdRoute from './production/packingProd.route.js';
+import qcProdRoute from './production/qcProd.route.js';
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get('/menu', getMenu);
 router.use('/useraccess', userAccesRoute);
 router.use('/sewing', sewOutputProdRoute);
 router.use('/packing', packProdRoute);
+router.use('/qc', qcProdRoute);
 
 router.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 400));
