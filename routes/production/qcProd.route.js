@@ -11,7 +11,12 @@ import {
   postDataLboDetail,
   postQCLboHeader,
 } from '../../controllers/prodQC/QCLbo.js';
-import { getQcLboReports } from '../../controllers/prodQC/QcDayReports.js';
+import {
+  getQcEndLinePart,
+  getQcEndLinePlan,
+  getQcLboReports,
+  getQcLboReportsPart,
+} from '../../controllers/prodQC/QcDayReports.js';
 
 router.get('/qc-lbo/header/:id', getQCLboHeader);
 router.get('/qc-lbo/:date/:unit', getPlanningQCLbo);
@@ -27,5 +32,9 @@ router.post('/qc-lbo-detail', postDataLboDetail);
 
 // report
 router.get(`/qc-day-report/lbo-plan/:date`, getQcLboReports);
+router.get(`/qc-day-report/lbo-part/:date`, getQcLboReportsPart);
+
+router.get(`/qc-day-report/endline-plan/:date`, getQcEndLinePlan);
+router.get(`/qc-day-report/endline-part/:date`, getQcEndLinePart);
 
 export default router;
