@@ -29,26 +29,27 @@ async () => {
   }
 };
 
-app.use(cors());
-// var whitelist = [
-//   'http://localhost:3000',
-//   'http://192.168.10.58',
-//   'http://192.168.158.150:3000',
-//   'http://192.168.10.67:3000',
-//   'http://117.74.123.236',
-// ];
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: function (origin, callback) {
-//       if (whitelist.indexOf(origin) !== -1) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error('Not allowed by CORS'));
-//       }
-//     },
-//   })
-// );
+// app.use(cors());
+var whitelist = [
+  'http://localhost:3000',
+  'http://192.168.10.58',
+  'http://192.168.158.150:3000',
+  'http://192.168.10.67:3000',
+  'http://117.74.123.236',
+  'http://117.74.123.236:5001',
+];
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
 
 app.use(cookieParser());
 app.use(express.json());
