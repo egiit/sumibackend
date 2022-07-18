@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import db from './config/database.js';
+import DB_HRD from './config/databaseHrd.js';
 dotenv.config();
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -15,7 +16,16 @@ async () => {
     await db.authenticate();
     console.log('DB Connected');
   } catch (err) {
-    console.log('Unable to connect to the database:', err);
+    console.log('Unable to connect to the database SUMI:', err);
+  }
+};
+
+async () => {
+  try {
+    await DB_HRD.authenticate();
+    console.log('DB Connected');
+  } catch (err) {
+    console.log('Unable to connect to the database SUI_HRD:', err);
   }
 };
 
@@ -23,9 +33,9 @@ async () => {
 var whitelist = [
   'http://localhost:3000',
   'http://192.168.10.58',
-  'http://192.168.189.150:3000',
+  'http://192.168.158.150:3000',
   'http://192.168.10.67:3000',
-  'http://117.74.123.236:3000',
+  'http://117.74.123.236',
 ];
 app.use(
   cors({
