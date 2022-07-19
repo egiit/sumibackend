@@ -28,4 +28,5 @@ const db = new Sequelize('db_sahabat_unggul', 'egipublic', 'Asd159789.', {
 //     timezone: 'local',
 //   },
 // });
+
 export default db;
