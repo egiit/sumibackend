@@ -8,6 +8,10 @@ import cors from 'cors';
 
 import sahabatRoute from './routes/index.js';
 
+import fs from 'fs';
+import https from 'https';
+import bodyParser from 'body-parser';
+
 const PORT = 5001;
 const app = express();
 
@@ -34,13 +38,21 @@ var whitelist = [
   'http://localhost:3000',
   'https://localhost:3000',
   'http://localhost:5001',
+  'https://localhost:5001',
   'http://192.168.10.58',
   'http://192.168.17.150:3000',
   'https://192.168.10.67:3000',
+  'https://192.168.10.67:5001',
   'http://192.168.10.67:3000',
   'http://117.74.123.236',
   'http://117.74.123.236:5001',
 ];
+
+const options = {
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert'),
+};
+
 app.use(
   cors({
     credentials: true,
@@ -53,9 +65,15 @@ app.use(
     },
   })
 );
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app.use(cookieParser());
 app.use(express.json());
 
 app.use('/', sahabatRoute);
-app.listen(PORT, () => console.log(`Server Runing On port : ${PORT}`));
+// app.listen(PORT, () => console.log(`Server Runing On port : ${PORT}`));
+
+https.createServer(options, app).listen(PORT, function (req, res) {
+  console.log(`Server Runing On port : ${PORT}`);
+});
