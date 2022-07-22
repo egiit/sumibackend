@@ -8,6 +8,7 @@ import userAccesRoute from './userAccess.route.js';
 import sewOutputProdRoute from './production/sewingprod.route.js';
 import packProdRoute from './production/packingProd.route.js';
 import qcProdRoute from './production/qcProd.route.js';
+import hrdMutasi from './hrd/hrdMutasi.route.js';
 
 const router = express.Router();
 
@@ -22,6 +23,8 @@ router.use('/useraccess', userAccesRoute);
 router.use('/sewing', sewOutputProdRoute);
 router.use('/packing', packProdRoute);
 router.use('/qc', qcProdRoute);
+
+router.use('/hrd/mutasi/', hrdMutasi);
 
 router.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 400));
