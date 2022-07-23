@@ -10,7 +10,7 @@ export const QueryKaryawansByLine = `SELECT c.*, d.nama sub_dept_name FROM (
 	SELECT 'tetap' empl_flag, a.id id_karyawan, a.id_sub_departemen id_sub_dept, a.nik, a.nama, a.masuk tgl_masuk FROM karyawans a 
 	WHERE a.id_sub_departemen = :id_sub AND a.status = 'aktif'
 	UNION ALL
-	SELECT 'traning' empl_flag, b.id id_karyawan, b.id_sub_dept, b.nik, b.nama, b.tgl_masuk FROM karyawans_tr b 
+	SELECT 'training' empl_flag, b.id id_karyawan, b.id_sub_dept, b.nik, b.nama, b.tgl_masuk FROM karyawans_tr b 
 	WHERE b.id_sub_dept = :id_sub AND b.status = 'AKTIF'
 ) c 
 LEFT JOIN sub_departemens d ON d.id = c. id_sub_dept`;
@@ -49,7 +49,7 @@ LEFT JOIN(
 	SELECT 'tetap' empl_flag, a.id id_karyawan, a.nik, a.nama FROM karyawans a 
 	WHERE a.status = 'aktif'
 	UNION ALL
-	SELECT 'traning' empl_flag, b.id id_karyawan, b.nik, b.nama FROM karyawans_tr b 
+	SELECT 'training' empl_flag, b.id id_karyawan, b.nik, b.nama FROM karyawans_tr b 
 	WHERE  b.status = 'AKTIF'
 ) e ON a.request_source = e.empl_flag AND a.id_karyawan = e.id_karyawan
 LEFT JOIN sub_departemens b ON a.id_old_sub_departemen = b.id
@@ -60,6 +60,6 @@ export const QueryGetEmpByNik = `SELECT c.*, d.nama sub_dept_name FROM (
 	SELECT 'tetap' empl_flag, a.id id_karyawan, a.id_sub_departemen id_sub_dept, a.nik, a.nama, a.masuk tgl_masuk FROM karyawans a 
 	WHERE a.nik = :nik AND a.status = 'aktif'
 	UNION ALL
-	SELECT 'traning' empl_flag, b.id id_karyawan, b.id_sub_dept, b.nik, b.nama, b.tgl_masuk FROM karyawans_tr b 
+	SELECT 'training' empl_flag, b.id id_karyawan, b.id_sub_dept, b.nik, b.nama, b.tgl_masuk FROM karyawans_tr b 
 	WHERE b.nik = :nik AND b.status = 'AKTIF' ) c 
 LEFT JOIN sub_departemens d ON d.id = c. id_sub_dept`;
